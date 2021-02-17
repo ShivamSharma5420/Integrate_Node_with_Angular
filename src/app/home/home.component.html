@@ -1,0 +1,228 @@
+<p>Book Store</p>
+
+
+
+
+
+
+<br>
+
+<button (click)="clickToGetBooks()">Get Books</button>
+
+<br>
+
+
+<div *ngIf="flag">
+    <table>
+        <tr>
+            <!--Service Example-->
+            <td>Book id</td>
+            <td>Book Name</td>
+            <td>Author Name </td>
+            <td>Publish Date </td>
+            <td>Genre </td>
+        </tr>
+        <tr *ngFor='let book of books'>
+            <!--Service Example-->
+            <td>{{book.book_id}}</td>
+            <td>{{book.book_name}}</td>
+            <td>{{book.author_name}}</td>
+            <td>{{book.publish_date}}</td>
+            <td>{{book.genre}}</td>
+        </tr>
+    </table>
+</div>
+
+<!--form for post request-->
+<div class="container-fluid">
+    <h2>Add New Book </h2>
+
+    {{form.value | json}}
+
+
+    <form [formGroup]='form'>
+
+
+        <div class="form-group">
+
+            <label>Book ID</label>
+            <input formControlName='book_id'
+                [ngClass]="{'is-invalid': form?.get('book_id')?.invalid &&  form?.get('book_id')?.touched}" type="text"
+                class="form-control">
+
+            <div *ngIf="form?.get('book_id')?.invalid &&  form?.get('book_id')?.touched">
+
+                <small *ngIf="form?.get('book_id')?.errors?.required">Id is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Book Name</label>
+            <input formControlName='book_name'
+                [class.is-invalid]="form?.get('book_name')?.invalid &&  form?.get('book_name')?.touched" type="text"
+                class="form-control">
+
+            <div *ngIf="form?.get('book_name')?.invalid &&  form?.get('book_name')?.touched">
+
+                <small *ngIf="form?.get('book_name')?.errors?.required">Name is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Author Name</label>
+            <input formControlName='author_name'
+                [class.is-invalid]="form?.get('author_name')?.invalid &&  form?.get('author_name')?.touched" type="text"
+                class="form-control">
+
+            <div *ngIf="form?.get('author_name')?.invalid &&  form?.get('author_name')?.touched">
+
+                <small *ngIf="form?.get('author_name')?.errors?.required">Author Name is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Publish Date</label>
+            <input formControlName='publish_date'
+                [class.is-invalid]="form?.get('publish_date')?.invalid &&  form?.get('publish_date')?.touched"
+                type="text" class="form-control">
+
+            <div *ngIf="form?.get('publish_date')?.invalid &&  form?.get('publish_date')?.touched">
+
+                <small *ngIf="form?.get('publish_date')?.errors?.required">publish_date is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Genre</label>
+            <input formControlName='genre'
+                [class.is-invalid]="form?.get('genre')?.invalid &&  form?.get('genre')?.touched" type="text"
+                class="form-control">
+
+            <div *ngIf="form?.get('genre')?.invalid &&  form?.get('genre')?.touched">
+
+                <small *ngIf="form?.get('genre')?.errors?.required">Genre is required</small>
+
+            </div>
+        </div>
+
+
+
+
+
+        <button *ngIf="form.valid" (click)="clickToPostBook()" type="submit">post new Book</button>
+        <h3 *ngIf="!form.valid">Fill all required feilds to post</h3>
+
+    </form>
+
+
+
+</div>
+
+
+<!--input for getbyid request-->
+
+<div>
+    <input [(ngModel)]='bookId' type="text">
+    <button (click)='deleteBookById()'>delete book</button>
+
+</div>
+
+<!--form for put request-->
+<div class="container-fluid">
+    <h2>update Book </h2>
+
+    {{putForm?.value | json}}
+
+    <form [formGroup]='putForm'>
+
+
+        <div class="form-group">
+
+            <label>Book ID</label>
+            <input formControlName='book_id'
+                [ngClass]="{'is-invalid': putForm?.get('book_id')?.invalid &&  putForm?.get('book_id')?.touched}"
+                type="text" class="form-control">
+
+            <div *ngIf="putForm?.get('book_id')?.invalid &&  putForm?.get('book_id')?.touched">
+
+                <small *ngIf="putForm?.get('book_id')?.errors?.required">Id is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Book Name</label>
+            <input formControlName='book_name'
+                [class.is-invalid]="putForm?.get('book_name')?.invalid &&  putForm?.get('book_name')?.touched"
+                type="text" class="form-control">
+
+            <div *ngIf="putForm?.get('book_name')?.invalid &&  putForm?.get('book_name')?.touched">
+
+                <small *ngIf="putForm?.get('book_name')?.errors?.required">Name is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Author Name</label>
+            <input formControlName='author_name'
+                [class.is-invalid]="putForm?.get('author_name')?.invalid &&  putForm?.get('author_name')?.touched"
+                type="text" class="form-control">
+
+            <div *ngIf="putForm?.get('author_name')?.invalid &&  putForm?.get('author_name')?.touched">
+
+                <small *ngIf="putForm?.get('author_name')?.errors?.required">Author Name is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Publish Date</label>
+            <input formControlName='publish_date'
+                [class.is-invalid]="putForm?.get('publish_date')?.invalid &&  putForm?.get('publish_date')?.touched"
+                type="text" class="form-control">
+
+            <div *ngIf="putForm?.get('publish_date')?.invalid &&  putForm?.get('publish_date')?.touched">
+
+                <small *ngIf="putForm?.get('publish_date')?.errors?.required">publish_date is required</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label>Genre</label>
+            <input formControlName='genre'
+                [class.is-invalid]="putForm?.get('genre')?.invalid &&  putForm?.get('genre')?.touched" type="text"
+                class="form-control">
+
+            <div *ngIf="putForm?.get('genre')?.invalid &&  putForm?.get('genre')?.touched">
+
+                <small *ngIf="putForm?.get('genre')?.errors?.required">Genre is required</small>
+
+            </div>
+        </div>
+
+
+
+
+
+        <button *ngIf="putForm.valid" (click)="clickToUpdateBook()" type="submit">post new Book</button>
+        <h3 *ngIf="!putForm.valid">Fill all required feilds to post</h3>
+
+    </form>
+
+
+
+</div>
