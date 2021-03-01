@@ -1,38 +1,38 @@
-<p>Book Store</p>
-
-
-
-
-
-
+<h1>Book Store</h1>
+<button (click)="logout()">LogOut</button>
 <br>
+<div>
+    <h2>Get Books</h2>
+    <button (click)="clickToGetBooks()">Get Books</button>
 
-<button (click)="clickToGetBooks()">Get Books</button>
-
-<br>
+    <br>
 
 
-<div *ngIf="flag">
-    <table>
-        <tr>
-            <!--Service Example-->
-            <td>Book id</td>
-            <td>Book Name</td>
-            <td>Author Name </td>
-            <td>Publish Date </td>
-            <td>Genre </td>
-        </tr>
-        <tr *ngFor='let book of books'>
-            <!--Service Example-->
-            <td>{{book.book_id}}</td>
-            <td>{{book.book_name}}</td>
-            <td>{{book.author_name}}</td>
-            <td>{{book.publish_date}}</td>
-            <td>{{book.genre}}</td>
-        </tr>
-    </table>
+    <div *ngIf="flag">
+        <table>
+            <tr>
+                <!--Service Example-->
+                <td>Book id</td>
+                <td>Book Name</td>
+                <td>Author Name </td>
+                <td>Publish Date </td>
+                <td>Genre </td>
+            </tr>
+            <tr *ngFor='let book of books'>
+                <!--Service Example-->
+                <td>{{book.book_id}}</td>
+                <td>{{book.book_name}}</td>
+                <td>{{book.author_name}}</td>
+                <td>{{book.publish_date}}</td>
+                <td>{{book.genre}}</td>
+            </tr>
+        </table>
+    </div>
+
 </div>
 
+<br>
+<hr>
 <!--form for post request-->
 <div class="container-fluid">
     <h2>Add New Book </h2>
@@ -90,7 +90,7 @@
             <label>Publish Date</label>
             <input formControlName='publish_date'
                 [class.is-invalid]="form?.get('publish_date')?.invalid &&  form?.get('publish_date')?.touched"
-                type="text" class="form-control">
+                type="datetime-local" class="form-control">
 
             <div *ngIf="form?.get('publish_date')?.invalid &&  form?.get('publish_date')?.touched">
 
@@ -126,18 +126,22 @@
 
 </div>
 
-
+<br>
+<hr>
 <!--input for getbyid request-->
 
 <div>
+    <h2>Delete Book </h2>
     <input [(ngModel)]='bookId' type="text">
     <button (click)='deleteBookById()'>delete book</button>
 
 </div>
 
+<br>
+<hr>
 <!--form for put request-->
 <div class="container-fluid">
-    <h2>update Book </h2>
+    <h2>Update Book </h2>
 
     {{putForm?.value | json}}
 
@@ -191,7 +195,7 @@
             <label>Publish Date</label>
             <input formControlName='publish_date'
                 [class.is-invalid]="putForm?.get('publish_date')?.invalid &&  putForm?.get('publish_date')?.touched"
-                type="text" class="form-control">
+                type="datetime-local" class="form-control">
 
             <div *ngIf="putForm?.get('publish_date')?.invalid &&  putForm?.get('publish_date')?.touched">
 
@@ -218,7 +222,7 @@
 
 
 
-        <button *ngIf="putForm.valid" (click)="clickToUpdateBook()" type="submit">post new Book</button>
+        <button *ngIf="putForm.valid" (click)="clickToUpdateBook()" type="submit">update Book</button>
         <h3 *ngIf="!putForm.valid">Fill all required feilds to post</h3>
 
     </form>

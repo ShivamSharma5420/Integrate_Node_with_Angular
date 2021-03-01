@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   flag = false;         //setting it to true if we get the data
 
-  books: Book[] = [];
+  books: any[] = [];
   constructor(protected webServ: WebService, private formBuilder: FormBuilder) {
 
 
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   clickToGetBooks() {
     this.webServ.getBooks().
-      subscribe((data) => { this.books = data; console.log("Books loaded"); this.flag = true; },
+      subscribe((data) => { this.books = data; console.log("Books Loaded "); this.flag = true; },
         (error) => { console.log(error.message); },
       );
 
@@ -73,9 +73,9 @@ export class HomeComponent implements OnInit {
       genre: this.form.controls['genre'].value
     }*/
 
-    this.webServ.postBook(this.form.value).subscribe((data) => console.log("Book is added"),
+    this.webServ.postBook(this.form.value).subscribe((data) => { console.log(JSON.parse(JSON.stringify(data)).message); alert(JSON.parse(JSON.stringify(data)).message) },
       (error) => console.log(error),
-      () => console.log("post completed"));
+      () => console.log("post request completed"));
 
   }
 
@@ -86,10 +86,18 @@ export class HomeComponent implements OnInit {
   }
 
   clickToUpdateBook() {
-    this.webServ.updateBook(this.putForm.value).subscribe((data) => console.log(data),
+    this.webServ.updateBook(this.putForm.value).subscribe((data) => { console.log(JSON.parse(JSON.stringify(data)).message); alert(JSON.parse(JSON.stringify(data)).message) },
       (error) => console.log(error),
-      () => console.log("update completed"));
+      () => console.log("update request completed"));
 
+  }
+
+
+
+
+  logout() {
+    this.webServ.logOut().subscribe((data) => { console.log(data.message); alert(data.message) },
+      (error) => { console.log(error) })
   }
 
 
