@@ -7,14 +7,18 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from "@angular/common/http"
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component'
+import { RegisterComponent } from './register/register.component';
+import { PipesComponent } from './pipes/pipes.component'
+import { CustomPipe } from './customPipe/custom.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PipesComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule,
@@ -23,6 +27,7 @@ import { RegisterComponent } from './register/register.component'
     FormsModule,
     ReactiveFormsModule
   ],
+  exports: [CustomPipe],
   providers: [],
   bootstrap: [AppComponent]
 })

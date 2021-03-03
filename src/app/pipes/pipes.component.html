@@ -1,0 +1,52 @@
+<h1>Pipes Practical</h1>
+
+<h2>Predefines pipes</h2>
+<hr>
+<h3>Original: {{name}}</h3>
+
+Through Pipe(uppercase): {{name | uppercase}}
+<br>
+Through Pipe(lowercase): {{name | lowercase}}
+<br>
+Through Pipe(titlecase): {{name | titlecase}}
+<br>
+Through Pipe(slice:2:10): {{name | slice:2:10}}
+
+<br><br>
+<h3>Original: {{date}}</h3>
+
+Through Pipe(date:'short'): {{date | date:'short'}}
+<br>
+Through Pipe(date:'medium'): {{date | date:'medium'}}
+<br>
+Through Pipe(date:'long'): {{date | date:'long'}}
+<br>
+Through Pipe(date:'full'): {{date | date:'full'}}
+<br>
+<br>
+Through Pipe(date:'shortDate'): {{date | date:'shortDate'}}
+<br>
+Through Pipe(date:'mediumDate'): {{date | date:'mediumDate'}}
+<br>
+Through Pipe(date:'longDate'): {{date | date:'longDate'}}
+<br>
+Through Pipe(date:'fullDate'): {{date | date:'fullDate'}}
+<br>
+<br>
+Through Pipe(date:'shortTime'): {{date | date:'shortTime'}}
+<br>
+Through Pipe(date:'mediumTime'): {{date | date:'mediumTime'}}
+<br>
+Through Pipe(date:'longTime'): {{date | date:'longTime'}}
+<br>
+Through Pipe(date:'fullTime'): {{date | date:'fullTime'}}
+<br>
+
+<h2>Custom pipes</h2>
+<hr>
+<h3>Original: {{name}}</h3>
+<ul>
+    <li *ngFor='let name of names'>{{name|uppercase | customPipe:3}}</li>
+</ul>
+
+<br>

@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http'
 import { Book } from './Book';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+//import 'rxjs/add/operator/catch';
+//import 'rxjs/add/operator/throw';
+
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -40,12 +44,34 @@ export class WebService {
   }
 
   registerUser(user: any): Observable<any> {
-    return this.http.post<any>(this.registerUserUrl, user, { withCredentials: true });
+    return this.http.post<any>(this.registerUserUrl, user, { withCredentials: true }).pipe(
+      // eg. "map" without a dot before
+      map(data => {
+        return data;
+      }),
+      // "catchError" instead "catch"
+      catchError(error => {
+        return throwError('Something went wrong :' + error.message);
+      }));
   }
+
 
   logOut(): Observable<any> {
     return this.http.get<any>(this.logOutUrl, { withCredentials: true });
   }
 
+  /* getPosts() {
+     // pack in "pipe()"
+     return this.http.get(this.url).pipe(
+       // eg. "map" without a dot before
+       map(data => {
+         return data;
+       }),
+       // "catchError" instead "catch"
+       catchError(error => {
+         return Observable.throw('Something went wrong ;)');
+       })
+     );
+   }*/
 
 }
