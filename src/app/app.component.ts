@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { WebService } from './web.service';
 
 @Component({
@@ -9,6 +10,10 @@ import { WebService } from './web.service';
 })
 export class AppComponent {
   title = 'integrate';
+
+  constructor() {
+
+  }
 
 
 

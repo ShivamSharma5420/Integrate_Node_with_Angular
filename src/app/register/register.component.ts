@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { ErrorsService } from '../errors.service';
+
 import { WebService } from '../web.service';
 
 @Component({
@@ -23,6 +26,7 @@ export class RegisterComponent implements OnInit {
   });
 
   clickToRegister() {
+    // throw Error("front end error in registering");           //just to check global error handling
     if (this.form.value.password != this.form.value.confirmPassword) {
       alert("password and confirm password not matching")
     }
@@ -33,10 +37,12 @@ export class RegisterComponent implements OnInit {
         alert(data.message);
 
       },
-        (error) => console.log(error));
+        (error) => { console.log(error); alert(error); });
 
 
     }
+
+
   }
 
 }

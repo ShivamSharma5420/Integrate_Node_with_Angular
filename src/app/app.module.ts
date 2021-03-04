@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PipesComponent } from './pipes/pipes.component'
 import { CustomPipe } from './customPipe/custom.pipe';
+import { ErrorsService } from './errors.service';
+import { NoRouteComponent } from './no-route/no-route.component';
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +22,8 @@ import { CustomPipe } from './customPipe/custom.pipe';
     LoginComponent,
     RegisterComponent,
     PipesComponent,
-    CustomPipe
+    CustomPipe,
+    NoRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,10 @@ import { CustomPipe } from './customPipe/custom.pipe';
     ReactiveFormsModule
   ],
   exports: [CustomPipe],
-  providers: [],
+  providers: [{
+    provide: ErrorHandler,
+    useClass: ErrorsService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

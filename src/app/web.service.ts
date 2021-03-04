@@ -24,7 +24,14 @@ export class WebService {
   logOutUrl = "http://localhost:3000/logOut"
 
   getBooks(): Observable<any[]> {
-    return this.http.get<any[]>(this.getUrl, { withCredentials: true });
+    return this.http.get<any[]>(this.getUrl, { withCredentials: true }).pipe(map(data => {
+      return data;
+    }),
+      catchError(error => {
+        if (error instanceof HttpErrorResponse)
+          alert("Backend Error");
+        return throwError('Wont able to get books: ' + error.error.message);
+      }));
   }
 
   postBook(book: Book): Observable<Book> {
@@ -51,7 +58,7 @@ export class WebService {
       }),
       // "catchError" instead "catch"
       catchError(error => {
-        return throwError('Something went wrong :' + error.message);
+        return throwError('Something went wrong :' + error.error.message);
       }));
   }
 

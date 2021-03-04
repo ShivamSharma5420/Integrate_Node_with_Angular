@@ -56,9 +56,11 @@ export class HomeComponent implements OnInit {
 
 
   clickToGetBooks() {
+    //throw Error("frontend error");              //just to check global error handling
+
     this.webServ.getBooks().
       subscribe((data) => { this.books = data; console.log("Books Loaded "); this.flag = true; },
-        (error) => { console.log(error.message); },
+        (error) => { console.log(error); },
       );
 
   }
