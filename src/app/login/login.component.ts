@@ -10,7 +10,7 @@ import { WebService } from '../web.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(protected webServ: WebService, private formBuilder: FormBuilder, private route: Router) { }
+  constructor(public webServ: WebService, public formBuilder: FormBuilder, public route: Router) { }
 
   ngOnInit(): void {
   }
